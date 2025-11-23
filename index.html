@@ -590,6 +590,7 @@
         .tech-marquee {
             display: flex;
             gap: 4rem;
+            padding: 2rem;
             width: 100%;
             overflow: hidden;
             white-space: nowrap;
@@ -841,7 +842,6 @@
         /* Tech Stack Marquee */
         .tech-section {
             overflow: hidden;
-            padding: 5rem 0;
             background: linear-gradient(to right, transparent, rgba(30, 41, 59, 0.3), transparent);
             border-top: 1px solid var(--card-border);
             border-bottom: 1px solid var(--card-border);
@@ -2017,15 +2017,15 @@
                         block: 'start'
                     });
 
-                    // Refresh AOS after scroll completes
+                    // Refresh AOS after scroll completes - use refreshHard to reset animations
                     setTimeout(() => {
-                        AOS.refresh();
-                    }, 800);
+                        AOS.refreshHard(); // Force re-initialization of all animations
+                    }, 1000);
                 }
             });
         });
 
-        // Navbar Scroll Effect
+        // Navbar Scroll Effect and AOS Refresh
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -2033,6 +2033,9 @@
             } else {
                 nav.classList.remove('scrolled');
             }
+
+            // Refresh AOS on scroll to ensure animations trigger
+            AOS.refresh();
         });
 
         // Mobile Menu
